@@ -13,7 +13,7 @@
 
 %token	<string_val> WORD
 
-%token 	NOTOKEN GREAT NEWLINE 
+%token 	NOTOKEN GREAT NEWLINE DOUBLEGREAT LESS PIPE AMP
 
 %union	{
 		char   *string_val;
@@ -45,7 +45,8 @@ command: simple_command
         ;
 
 simple_command:	
-	command_and_args iomodifier_opt NEWLINE {
+	command_and_args
+	| command_and_args iomodifier_opt NEWLINE {
 		printf("   Yacc: Execute command\n");
 		Command::_currentCommand.execute();
 	}
@@ -86,6 +87,19 @@ iomodifier_opt:
 	GREAT WORD {
 		printf("   Yacc: insert output \"%s\"\n", $2);
 		Command::_currentCommand._outFile = $2;
+	}
+	| DOUBLEGREAT WORD {
+		printf("   Yacc: append output \"%s\"\n", $2);
+		Command::_currentCommand._outFile = $2;
+		Command::_currentCommand._append = 1;
+	}
+	| /* can be empty */ 
+	;
+	
+iomodifier_ipt:
+	LESS WORD {
+		printf("   Yacc: insert input \"%s\"\n", $2);
+		Command::_currentCommand._inputFile = $2; //find _inputFile in command.h
 	}
 	| /* can be empty */ 
 	;
