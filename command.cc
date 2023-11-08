@@ -57,6 +57,8 @@ Command::Command()
 	_inputFile = 0;
 	_errFile = 0;
 	_background = 0;
+	//here
+	_append = 0;
 }
 
 void
@@ -101,6 +103,8 @@ Command:: clear()
 	_inputFile = 0;
 	_errFile = 0;
 	_background = 0;
+	_append = 0;
+	//here
 }
 
 void
@@ -124,7 +128,7 @@ Command::print()
 	printf( "  ------------ ------------ ------------ ------------\n" );
 	printf( "  %-12s %-12s %-12s %-12s\n", _outFile?_outFile:"default",
 		_inputFile?_inputFile:"default", _errFile?_errFile:"default",
-		_background?"YES":"NO");
+		_background?"YES":"NO", _append?"YES":"NO");
 	printf( "\n\n" );
 	
 }
@@ -174,4 +178,3 @@ main()
 	yyparse();
 	return 0;
 }
-
