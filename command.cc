@@ -57,6 +57,8 @@ Command::Command()
 	_inputFile = 0;
 	_errFile = 0;
 	_background = 0;
+	//here
+	_append = 0;
 }
 
 void
@@ -101,6 +103,8 @@ Command:: clear()
 	_inputFile = 0;
 	_errFile = 0;
 	_background = 0;
+	_append = 0;
+	
 }
 
 void
@@ -116,7 +120,9 @@ Command::print()
 		printf("  %-3d ", i );
 		for ( int j = 0; j < _simpleCommands[i]->_numberOfArguments; j++ ) {
 			printf("\"%s\" \t", _simpleCommands[i]->_arguments[ j ] );
+			
 		}
+		printf( "\n" );
 	}
 
 	printf( "\n\n" );
@@ -174,4 +180,3 @@ main()
 	yyparse();
 	return 0;
 }
-

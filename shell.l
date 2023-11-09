@@ -27,6 +27,22 @@
 ">" 	{
 		return GREAT;
 	}
+	
+"<" 	{
+		return LESS;
+	}
+	
+">>" 	{
+		return DOUBLEGREAT;
+	}
+	
+"|" 	{
+		return PIPE;
+	}
+	
+"&" 	{
+		return AMP;
+	}
 
 [^ \t\n][^ \t\n]*  {
 		/* Assume that file names have only alpha chars */
