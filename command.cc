@@ -104,7 +104,7 @@ Command:: clear()
 	_errFile = 0;
 	_background = 0;
 	_append = 0;
-	//here
+	
 }
 
 void
@@ -120,7 +120,9 @@ Command::print()
 		printf("  %-3d ", i );
 		for ( int j = 0; j < _simpleCommands[i]->_numberOfArguments; j++ ) {
 			printf("\"%s\" \t", _simpleCommands[i]->_arguments[ j ] );
+			
 		}
+		printf( "\n" );
 	}
 
 	printf( "\n\n" );
@@ -128,7 +130,7 @@ Command::print()
 	printf( "  ------------ ------------ ------------ ------------\n" );
 	printf( "  %-12s %-12s %-12s %-12s\n", _outFile?_outFile:"default",
 		_inputFile?_inputFile:"default", _errFile?_errFile:"default",
-		_background?"YES":"NO", _append?"YES":"NO");
+		_background?"YES":"NO");
 	printf( "\n\n" );
 	
 }
