@@ -45,13 +45,24 @@ command: simple_command
         ;
 
 simple_command:	
-	command_and_args
-	| command_and_args iomodifier_opt NEWLINE {
+	
+	command_and_args iomodifier_ipt iomodifier_opt background_opt pipe_opt simple_command  {
+		printf("   Yacc: Execute command\n");
+		Command::_currentCommand.execute();
+	}
+	| command_and_args iomodifier_ipt iomodifier_opt background_opt NEWLINE  {
 		printf("   Yacc: Execute command\n");
 		Command::_currentCommand.execute();
 	}
 	| NEWLINE 
 	| error NEWLINE { yyerrok; }
+	;
+
+pipe_opt:
+	pipe_opt PIPE command_and_args{
+		printf("   Yacc: pipe \n");
+	}
+	|
 	;
 
 command_and_args:
@@ -101,8 +112,20 @@ iomodifier_ipt:
 		printf("   Yacc: insert input \"%s\"\n", $2);
 		Command::_currentCommand._inputFile = $2; //find _inputFile in command.h
 	}
+	| PIPE {
+		printf("   Yacc: insert input \"%s\"\n", Command::_currentCommand._outFile);
+		Command::_currentCommand._inputFile = Command::_currentCommand._outFile;
+	}
 	| /* can be empty */ 
 	;
+	
+background_opt:
+	AMP {
+		Command::_currentCommand._background = 1;
+	}
+	| /* can be empty */ 
+	;
+	
 
 %%
 
