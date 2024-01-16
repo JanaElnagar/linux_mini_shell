@@ -1,5 +1,7 @@
 # linux_mini_shell
 
+Project for the Operating Systems course.
+
 ## Steps to run:
 
 1- Download the file directory \
